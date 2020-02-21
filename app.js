@@ -1,6 +1,6 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import router from './routes/index.js';
+import express from "express";
+import bodyParser from "body-parser";
+import router from "./routes/index.js";
 
 const app = express();
 const PORT = 3000;
@@ -9,5 +9,6 @@ const PORT = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
-app.listen(PORT, 
-   () => console.log(`Hello world app listening on port ${PORT}!`))
+app.listen(PORT, () =>
+  console.log(`Hello world app listening on port ${PORT}!`)
+);
