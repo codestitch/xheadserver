@@ -1,0 +1,1 @@
+export type Suite = 'Diamond' | 'Spade' | 'Club' | 'Heart';
