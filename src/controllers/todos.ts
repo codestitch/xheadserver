@@ -1,10 +1,10 @@
-import { Todo, TodoModel } from '../sql/models';
+import { db } from '../sql/models';
 import { NextFunction, Request, Response } from 'express';
 import { UpdateOptions, DestroyOptions } from 'sequelize/types';
 
 class TodosController {
    getAll(req: Request, res: Response, next: NextFunction) {
-      Todo.findAll().then(todos =>
+      db.Todo.findAll().then(todos =>
          res.status(200).json({
             data: todos
          })
@@ -13,7 +13,7 @@ class TodosController {
 
    get(req: Request, res: Response, next: NextFunction) {
       const id = parseInt(req.params.id, 10);
-      Todo.findByPk(id).then(todo => {
+      db.Todo.findByPk(id).then(todo => {
          if (todo) {
             return res.status(200).json({
                data: todo
@@ -32,7 +32,7 @@ class TodosController {
          });
       }
 
-      Todo.findOne({
+      db.Todo.findOne({
          where: { title: req.body.title }
       }).then(todoFound => {
          if (todoFound) {
@@ -42,20 +42,20 @@ class TodosController {
          }
          const todo = req.body;
 
-         Todo.create(todo)
-            .then((data: TodoModel) => res.status(201).json(data))
+         db.Todo.create(todo)
+            .then((data) => res.status(201).json(data))
             .catch((err: Error) => res.status(500).json(err));
       });
    }
 
    update(req: Request, res: Response, next: NextFunction) {
       const todoId: number = parseInt(req.params.id, 10);
-      const todo: TodoModel = req.body;
+      const todo = req.body;
       const update: UpdateOptions = {
          where: { id: todoId },
          limit: 1
       };
-      Todo.update(todo, update)
+      db.Todo.update(todo, update)
          .then(() => res.status(202).json({ data: todo }))
          .catch((err: Error) => res.status(500).json(err));
    }
@@ -67,7 +67,7 @@ class TodosController {
          limit: 1
       };
 
-      Todo.destroy(options)
+      db.Todo.destroy(options)
          .then(() => res.status(204).json({ data: 'success' }))
          .catch((err: Error) => res.status(500).json(err));
    }
