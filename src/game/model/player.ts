@@ -1,7 +1,8 @@
 import { Card } from "./card";
 
-export interface Deck {
+export interface Player {
    id: string;
-   count: number;
+   name: string;
+   blinds: Card[];
    cards: Card[];
 }
