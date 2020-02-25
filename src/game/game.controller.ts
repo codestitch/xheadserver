@@ -1,6 +1,6 @@
-import { db } from '../sql/models';
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
+import Game from '../sql/models/game';
 
 class GameController {
    deal(req: Request, res: Response, next: NextFunction) {
@@ -20,8 +20,8 @@ class GameController {
          used: null
       };
 
-      db.Game.create(theGame)
-         .then((data) => res.status(201).json(data))
+      Game.create(theGame)
+         .then(data => res.status(201).json(data))
          .catch((err: Error) => res.status(500).json(err));
    }
 }
