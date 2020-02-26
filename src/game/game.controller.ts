@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import Game from '../sql/models/game';
+import { Game, Player } from '../db/models';
+import { PlayerAttribute } from './model';
 
 class GameController {
-   deal(req: Request, res: Response, next: NextFunction) {
+   newDeal(req: Request, res: Response, next: NextFunction) {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
          return res.status(422).json({ errors: errors.array() });
@@ -21,6 +22,30 @@ class GameController {
       };
 
       Game.create(theGame)
+         .then(data => res.status(201).json(data))
+         .catch((err: Error) => res.status(500).json(err));
+   }
+
+   all(req: Request, res: Response, next: NextFunction) {
+      Game.findAll().then(games => res.status(200).json(games));
+   }
+
+   draw(req: Request, res: Response, next: NextFunction) {
+      const gameId = parseInt(req.params.id, 10);
+      Game.findByPk(gameId)
+         .then(data => res.status(201).json(data))
+         .catch((err: Error) => res.status(500).json(err));
+   }
+
+   newPlayer(req: Request, res: Response, next: NextFunction) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+         return res.status(422).json({ errors: errors.array() });
+      }
+
+      const player: PlayerAttribute = req.body;
+
+      Player.create(player)
          .then(data => res.status(201).json(data))
          .catch((err: Error) => res.status(500).json(err));
    }

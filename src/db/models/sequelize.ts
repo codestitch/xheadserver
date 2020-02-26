@@ -1,12 +1,13 @@
 import { config } from 'dotenv';
 import { Sequelize } from 'sequelize-typescript';
-import Game from './game';
-import Player from './player';
+import { Game } from './game';
+import { Player } from './player';
+
 config();
 
 const env = process.env.NODE_ENV || 'development';
 // tslint:disable-next-line: no-var-requires
-const localConfig = require('..\\..\\config\\config.json')[env];
+const localConfig = require('..\\..\\db\\config\\config.json')[env];
 
 let sequelize: Sequelize;
 if (localConfig.use_env_variable) {
@@ -23,4 +24,8 @@ if (localConfig.use_env_variable) {
 
 sequelize.addModels([Game, Player]);
 
-export { sequelize };
+function initSequelize() {
+   console.log('Sequelize initialized');
+}
+
+export { sequelize, initSequelize };

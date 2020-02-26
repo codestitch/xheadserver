@@ -1,10 +1,10 @@
 import { Deck } from "./deck";
-import { Player } from "./player";
+import { PlayerAttribute } from "./player-attribute";
 import { Card } from ".";
 
 export interface Game {
    id: string;
    deck: Deck;
-   players: Player[];
+   players: PlayerAttribute[];
    dead: Card[];
 }
