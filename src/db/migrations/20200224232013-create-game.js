@@ -14,8 +14,8 @@ module.exports = {
       hasjoker: {
         type: Sequelize.BOOLEAN
       },
-      remaining: {
-        type: Sequelize.INTEGER
+      play: {
+        type: Sequelize.STRING
       },
       dead: {
         type: Sequelize.STRING

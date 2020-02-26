@@ -32,7 +32,7 @@ export class Game extends Model<Game> {
    hasjoker: boolean;
 
    @Column
-   remaining: number;
+   play: string;
 
    @Column
    dead: string;
