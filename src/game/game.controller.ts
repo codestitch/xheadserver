@@ -6,6 +6,15 @@ import * as _ from 'lodash';
 import { ToArray } from '../services/util';
 
 class GameController {
+   /**
+    * Deals new game
+    * @route POST /api/v1/games/deal
+    * @group Games - Game operation
+    * @param {boolean} hasjoker.query.required - you want joker or not?
+    * @param {number} deck.query.required - how many decks you want?
+    * @returns {Game} 200 - Game object
+    * @returns {Error}  default - Unexpected error
+    */
    deal(req: Request, res: Response, next: NextFunction) {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -27,10 +36,24 @@ class GameController {
          .catch((err: Error) => res.status(500).json(err));
    }
 
+   /**
+    * Gets all games
+    * @route GET /api/v1/games
+    * @group Games - Game operation
+    * @returns {Game[]} 200 - An array of games info
+    * @returns {Error}  default - Unexpected error
+    */
    all(req: Request, res: Response) {
       Game.findAll().then(games => res.status(200).json(games));
    }
 
+   /**
+    * Draws cards
+    * @route GET /api/v1/games/:id/draw
+    * @group Games - Game operation
+    * @returns {string[]} 200 - An array of cards
+    * @returns {Error}  default - Unexpected error
+    */
    draw = (req: Request, res: Response) => {
       const gameId = parseInt(req.params.id, 10);
       const drawCount = parseInt(req.query.count, 10);
@@ -40,6 +63,13 @@ class GameController {
       );
    };
 
+   /**
+    * Draws and saves cards
+    * @route GET /api/v1/games/:id/drawCommit
+    * @group Games - Game operation
+    * @returns {string[]} 200 - An array of cards
+    * @returns {Error}  default - Unexpected error
+    */
    drawCommit = (req: Request, res: Response) => {
       const gameId = parseInt(req.params.id, 10);
       const drawCount = parseInt(req.query.count, 10);

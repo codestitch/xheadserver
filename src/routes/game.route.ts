@@ -8,12 +8,12 @@ export function AppRoute(app: Express) {
    app.post('/api/v1/games/deal', gameValidation.newDeal, gameController.deal);
 
    app.post(
-      '/api/v1/games/player',
+      '/api/v1/player/create',
       playerValidation.newPlayer,
       playerController.create
    );
-   app.get('/api/v1/games/player/:id/getcards', playerController.getCards);
-   app.post('/api/v1/games/player/newcards', playerValidation.newCards, playerController.newCards);
+   app.post('/api/v1/player/newcards', playerValidation.newCards, playerController.newCards);
+   app.get('/api/v1/player/:id/getcards', playerController.getCards);
 }
 
 /**

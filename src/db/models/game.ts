@@ -10,6 +10,14 @@ import {
 } from 'sequelize-typescript';
 import { Player } from './player';
 
+/**
+ * @typedef Game
+ * @property {integer} deck - number of deck
+ * @property {boolean} hasjoker - if it has joker
+ * @property {string} play - cards in play pile
+ * @property {string} dead - cards in dead pile
+ * @property {string} used - cards in used by players
+ */
 @Table
 export class Game extends Model<Game> {
    @PrimaryKey
