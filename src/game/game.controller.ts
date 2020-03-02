@@ -8,10 +8,9 @@ import { ToArray } from '../services/util';
 class GameController {
    /**
     * Deals new game
-    * @route POST /api/v1/games/deal
+    * @route POST /games/deal
     * @group Games - Game operation
-    * @param {boolean} hasjoker.query.required - you want joker or not?
-    * @param {number} deck.query.required - how many decks you want?
+    * @param {DealCommand.model} data.body.required - data for dealing
     * @returns {Game} 200 - Game object
     * @returns {Error}  default - Unexpected error
     */
@@ -38,7 +37,7 @@ class GameController {
 
    /**
     * Gets all games
-    * @route GET /api/v1/games
+    * @route GET /games
     * @group Games - Game operation
     * @returns {Game[]} 200 - An array of games info
     * @returns {Error}  default - Unexpected error
@@ -49,8 +48,10 @@ class GameController {
 
    /**
     * Draws cards
-    * @route GET /api/v1/games/:id/draw
+    * @route GET /games/{id}/draw
     * @group Games - Game operation
+    * @param {number} id.path.required - game id.
+    * @param {number} count.query.required - how many cards to draw.
     * @returns {string[]} 200 - An array of cards
     * @returns {Error}  default - Unexpected error
     */
@@ -65,7 +66,7 @@ class GameController {
 
    /**
     * Draws and saves cards
-    * @route GET /api/v1/games/:id/drawCommit
+    * @route GET /games/{id}/drawCommit
     * @group Games - Game operation
     * @returns {string[]} 200 - An array of cards
     * @returns {Error}  default - Unexpected error

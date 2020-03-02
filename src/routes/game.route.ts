@@ -1,19 +1,19 @@
 import { Express } from 'express';
-import { gameController, gameValidation, playerController, playerValidation } from '../game';
+import { gameController,  playerController, playerValidation } from '../game';
 
 export function AppRoute(app: Express) {
    app.get('/api/v1/games', gameController.all);
    app.get('/api/v1/games/:id/drawCommit', gameController.drawCommit);
    app.get('/api/v1/games/:id/draw', gameController.draw);
-   app.post('/api/v1/games/deal', gameValidation.newDeal, gameController.deal);
+   app.post('/api/v1/games/deal', gameController.deal);
 
    app.post(
-      '/api/v1/player/create',
+      '/api/v1/players/create',
       playerValidation.newPlayer,
       playerController.create
    );
-   app.post('/api/v1/player/newcards', playerValidation.newCards, playerController.newCards);
-   app.get('/api/v1/player/:id/getcards', playerController.getCards);
+   app.post('/api/v1/players/newcards', playerValidation.newCards, playerController.newCards);
+   app.get('/api/v1/players/:id/getcards', playerController.getCards);
 }
 
 /**

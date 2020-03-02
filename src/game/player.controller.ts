@@ -9,7 +9,7 @@ import { ToArray } from '../services/util';
 class PlayerController {
    /**
     * Creates new player
-    * @route POST /api/v1/player/create
+    * @route POST /players/create
     * @group Player - Game operation
     * @param {string} name.query.required - player name.
     * @param {number} gameId.query.required - game id.
@@ -48,7 +48,7 @@ class PlayerController {
                const createPlayer = Player.create(newPlayer);
 
                Promise.all([gameUpdate, createPlayer])
-                  .then(([_, player]) => res.status(201).json(player))
+                  .then(([__, player]) => res.status(201).json(player))
                   .catch((err: Error) => res.status(500).json(err));
             } else {
                res.status(500).json({ error: 'error' });
@@ -59,7 +59,7 @@ class PlayerController {
 
    /**
     * Saves new cards of player
-    * @route POST /api/v1/player/newcards
+    * @route POST /players/newcards
     * @group Player - Game operation
     * @param {number} playerId.query.required - player id.
     * @param {number} gameId.query.required - game id.
@@ -85,14 +85,14 @@ class PlayerController {
             { where: { id: playerId } }
          );
          Promise.all([gameUpdate, playerUpdate])
-            .then(([_, player]) => res.status(201).json(player))
+            .then(([__, player]) => res.status(201).json(player))
             .catch((err: Error) => res.status(500).json(err));
       });
    }
 
    /**
     * Gets player hands and trump cards
-    * @route POST /api/v1/player/newcards
+    * @route POST /players/newcards
     * @group Player - Game operation
     * @param {number} playerId.query.required - player id.
     * @returns {string[]} 200 - Hand and trump cards
