@@ -2,14 +2,11 @@
    "compilerOptions": {
       "module": "commonjs",
       "target": "es6",
+      "outDir": "./dist/server",
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "sourceMap": true,
-      "strictNullChecks": false,
-      "noUnusedLocals": true,
-      "pretty": true,
-      "skipLibCheck": true,
-      "lib": ["es2015"]
+      "typeRoots": ["node_modules/@types"]
    },
-   "exclude": ["node_modules", "tmp"]
+   "exclude": ["node_modules", "tmp", "dist"]
 }
