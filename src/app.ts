@@ -1,10 +1,15 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as http from 'http';
+
+import { Server } from 'colyseus';
+import { monitor } from '@colyseus/monitor';
 
 import { routes } from './routes/index';
 import { db } from './db/models';
 import { swaggerInit } from './swagger';
+import { AppRoom } from './app-room';
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +24,15 @@ app.use(cors());
 routes.init(app);
 db.init();
 
-app.listen(PORT, () =>
-   console.log(`Hello world app listening on port ${PORT}!`)
-);
+const server = http.createServer(app);
+const gameServer = new Server({
+   server
+});
+
+// register your room handlers
+gameServer.define('my_room', AppRoom);
+
+app.use('/colyseus', monitor());
+
+gameServer.listen(PORT);
+console.log(`Listening on ws://localhost:${PORT}`);
