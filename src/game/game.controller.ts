@@ -21,10 +21,12 @@ class GameController {
       }
 
       const isJoker = req.body.hasjoker === 'true';
-      const deckCount: number = parseInt(req.body.deck, 10);
+      const deckCount: number = parseInt(req.body.deckcount, 10);
+      const playerCount: number = parseInt(req.body.playercount, 10);
       const newGame = {
          hasjoker: isJoker,
-         deck: deckCount,
+         deckCount,
+         playerCount,
          play: null,
          dead: null,
          used: null

@@ -12,7 +12,8 @@ import { Player } from './player';
 
 /**
  * @typedef Game
- * @property {integer} deck - number of deck
+ * @property {integer} deckcount - number of deck
+ * @property {integer} playercount - number of deck
  * @property {boolean} hasjoker - if it has joker
  * @property {string} play - cards in play pile
  * @property {string} dead - cards in dead pile
@@ -34,7 +35,10 @@ export class Game extends Model<Game> {
    updatedAt: Date;
 
    @Column
-   deck: number;
+   playercount: number;
+
+   @Column
+   deckcount: number;
 
    @Column
    hasjoker: boolean;

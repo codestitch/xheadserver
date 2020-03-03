@@ -1,9 +1,11 @@
 /**
  * @typedef DealCommand
  * @property {boolean} hasjoker.required
- * @property {number} deck.required
+ * @property {number} deckcount.required
+ * @property {number} playercount.required
  */
 export interface DealCommand {
    hasjoker: boolean;
-   deck: number;
+   deckcount: number;
+   playercount: number;
 }

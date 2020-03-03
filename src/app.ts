@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 
 import { routes } from './routes/index';
 import { db } from './db/models';
@@ -43,6 +44,7 @@ expressSwagger(options);
 // Parse incoming requests data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors())
 
 routes.init(app);
 db.init();

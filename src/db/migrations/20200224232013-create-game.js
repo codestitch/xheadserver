@@ -8,7 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      deck: {
+      playercount: {
+        type: Sequelize.INTEGER
+      },
+      deckcount: {
         type: Sequelize.INTEGER
       },
       hasjoker: {
