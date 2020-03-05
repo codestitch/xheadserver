@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { Game } from '../db/models';
-import { CARDS, JOKERS } from './model';
 import * as _ from 'lodash';
 import { ToArray } from '../services/util';
+import { CARDS, JOKERS } from '../card/models/card-list';
 
 class GameController {
    /**

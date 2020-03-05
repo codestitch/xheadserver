@@ -1,5 +1,5 @@
 import { check } from 'express-validator';
-import { CARDS } from './model/card';
+import { CARDS } from '../card/models/card-list';
 
 export const gameValidation = {
    newDeal: [

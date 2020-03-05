@@ -9,7 +9,7 @@ import { monitor } from '@colyseus/monitor';
 import { routes } from './routes/index';
 import { db } from './db/models';
 import { swaggerInit } from './swagger';
-import { AppRoom } from './app-room';
+import { AppRoom } from './card/app-room';
 
 const app = express();
 const PORT = 3000;
@@ -30,7 +30,7 @@ const gameServer = new Server({
 });
 
 // register your room handlers
-gameServer.define('my_room', AppRoom);
+gameServer.define('CardBattle', AppRoom);
 
 app.use('/colyseus', monitor());
 
