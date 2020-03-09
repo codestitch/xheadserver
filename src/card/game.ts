@@ -17,12 +17,16 @@ export class Game {
       this.deadPile = [...this.deadPile, ...cards];
    }
 
-   draw(count: number) {
+   draw(count: number): string[] {
       if (this.drawPile && this.drawPile.length > 0) {
          const drawnCards = this.drawPile.slice(0, count);
          this.drawPile = _.difference(this.drawPile, drawnCards);
          return drawnCards;
       }
+   }
+
+   drawAsString(count: number): string {
+      return this.draw(count).toString();
    }
 
    shuffler(cards: string[]): string[] {

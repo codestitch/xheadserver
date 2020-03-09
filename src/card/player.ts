@@ -16,4 +16,14 @@ export class Player extends Schema {
       super();
       this.name = _name;
    }
+
+   setCards(
+      _hands: string,
+      _blinds: string,
+      _trumps: string
+   ) {
+      this.hands = _hands;
+      this.blinds = _blinds;
+      this.trumps = _trumps;
+   }
 }

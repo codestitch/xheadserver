@@ -16,10 +16,7 @@ export class AppRoom extends Room<GameState, RoomMetaData> {
    }
 
    onJoin(client: Client, options: RoomMetaData) {
-      this.state.createPlayer(
-         client.sessionId,
-         `${options.playerName}`
-      );
+      this.state.createPlayer(client.sessionId, `${options.playerName}`);
 
       console.log('CLIENT JOINED!', client.sessionId, options);
       this.broadcast(`${client.sessionId} joined.`);
@@ -33,6 +30,10 @@ export class AppRoom extends Room<GameState, RoomMetaData> {
          message
       );
       switch (message.action) {
+         case StateActionEnum.START:
+            this.state.start();
+            break;
+
          case StateActionEnum.DRAW:
             this.state.drawCard(client.sessionId, message.data.count);
             break;
@@ -40,6 +41,7 @@ export class AppRoom extends Room<GameState, RoomMetaData> {
    }
 
    onLeave(client: Client, consented: boolean) {
+      this.state.removePlayer(client.sessionId);
       this.broadcast(`${client.sessionId} left.`);
    }
 
